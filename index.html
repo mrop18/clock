@@ -12,7 +12,8 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #090909;
+    background-color: #000000;
+    font-family: sans-serif;
 }
 .container{
     position: relative;
@@ -155,7 +156,6 @@ body{
     transform: rotate(calc(30deg * var(--i)));
 }
 .timetext span b{
-    font-family: sans-serif;
     font-size: 30px;
     display: inline-block;
     transform: rotate(calc(-30deg * var(--i)));
@@ -331,10 +331,12 @@ body{
 }
 .daytext span b{
     font-size: 0.6rem;
+    font-weight: 500;
     display: inline-block;
     /* transform: rotate(calc(0deg)); */
-    text-shadow: 5px 1px 20px  rgba(171, 250, 0, 1);
+    /* text-shadow: 5px 1px 20px  rgba(171, 250, 0, 1); */
     z-index: 10;
+    opacity: .3;
 }
 .logo{
     position: absolute;
@@ -345,6 +347,7 @@ body{
     background-size: contain;
     /* background-color: white; */
 }
+
 
 </style>
 <body>
@@ -394,13 +397,13 @@ body{
 
                     </div>
                     <div class="daytext">
-                        <span style="--i:0" id="dtext"><b>SUN</b></span>
-                        <span style="--i:1" id="dtext"><b>MON</b></span>
-                        <span style="--i:2" id="dtext"><b>TUE</b></span>
-                        <span style="--i:3" id="dtext"><b>WED</b></span>
-                        <span style="--i:4" id="dtext"><b>THU</b></span>
-                        <span style="--i:5" id="dtext"><b>FRI</b></span>
-                        <span style="--i:6" id="dtext"><b>SAT</b></span>
+                        <span style="--i:0" ><b id="dtext1"></b></span>
+                        <span style="--i:1" ><b id="dtext2"></b></span>
+                        <span style="--i:2" ><b id="dtext3"></b></span>
+                        <span style="--i:3" ><b id="dtext4"></b></span>
+                        <span style="--i:4" ><b id="dtext5"></b></span>
+                        <span style="--i:5" ><b id="dtext6"></b></span>
+                        <span style="--i:6" ><b id="dtext7"></b></span>
                     </div>
 
                 </div>
@@ -470,6 +473,7 @@ body{
         
         setInterval(()=>{
             const mon = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+            const din = ["SUN","MON","TUE","WED","THU","FRI","SAT"];
             // let hours = document.getElementById("hours");
             // let ampm = document.getElementById("ampm");
             // let minutes = document.getElementById("minutes");
@@ -481,6 +485,20 @@ body{
             let s = new Date().getSeconds();
             let d = new Date().getDate();
             let mo = mon[new Date().getMonth()];
+            let di = new Date().getDay();
+
+            for (let i = 0; i<din.length; i++){
+                const dtextID = "dtext"+(i+1);
+                const dtextdin = document.getElementById(dtextID);
+                dtextdin.textContent=din[i];
+
+                if(i === di){
+                    dtextdin.style.color = "#abfa00";
+                    dtextdin.style.fontWeight = "800";
+                    dtextdin.style.opacity = "1";
+                }
+            }
+
 
             var am = h >=12 ? 'PM' : 'AM' ;
             
@@ -510,17 +528,12 @@ body{
         
 
         })
-       document.getElementById("mainbox").addEventListener('click',()=>{
-        i=0;
-        if(!i){
-            document.getElementById("mainbox").style = "background-color:black"
 
-            i=1;
-        }    
+
         
-       })
 
 
     </script>
+    
 </body>
 </html>
